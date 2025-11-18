@@ -1,0 +1,109 @@
+# =========================================
+# Go Build Artifacts
+# =========================================
+/bin/
+/build/
+/dist/
+/out/
+/release/
+/target/
+
+/*.exe
+/*.dll
+/*.so
+/*.dylib
+/*.test
+*.test
+*.a
+
+# Go workspace
+go.work
+go.work.sum
+
+# =========================================
+# Gin Project Common
+# =========================================
+
+# Logs
+*.log
+logs/
+log/
+
+# Runtime temp files
+tmp/
+temp/
+*.tmp
+*.cache
+.cache/
+
+# Uploaded files (if your project supports file upload)
+uploads/
+upload/
+
+# Static build (if using frontend)
+public/dist/
+public/static/
+static/dist/
+static/assets/
+
+# =========================================
+# Environment Files
+# =========================================
+.env
+.env.*
+!env.example   # allow template env file
+
+# =========================================
+# Modules (optional)
+# =========================================
+vendor/
+
+# =========================================
+# Air / Live Reload Tools
+# =========================================
+.air.toml
+.tmp/          # air default tmp dir
+air.log
+
+# fresh live reload
+tmp-run/
+
+# realize
+.realize/
+
+# =========================================
+# IDE & Editor
+# =========================================
+
+# Goland / IntelliJ
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+
+# Sublime
+*.sublime-workspace
+*.sublime-project
+
+# =========================================
+# OS / Misc
+# =========================================
+.DS_Store
+Thumbs.db
+
+# =========================================
+# Docker
+# =========================================
+/docker-data/
+/docker-volume/
+/docker-compose.override.yml
