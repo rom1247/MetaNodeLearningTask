@@ -4,9 +4,16 @@ import (
 	"fmt"
 
 	"github.com/glebarez/sqlite"
+	"github.com/jmoiron/sqlx"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
+
+func InitSqlxDb() *sqlx.DB {
+	cfg := Load(SQLite)
+	db, _ := sqlx.Open("sqlite", cfg.SqlitePath)
+	return db
+}
 
 func Init(cfg *Config) *gorm.DB {
 
