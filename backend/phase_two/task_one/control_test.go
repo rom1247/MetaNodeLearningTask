@@ -18,7 +18,8 @@ func TestSingleNumber(t *testing.T) {
 
 	nums = []int{4, 1, 2, 1, 2, 5}
 	number3 := singleNumber3(nums)
-	assert.Equal(t, []int{4, 5}, number3)
+	//assert.Equal(t, []int{4, 5}, number3) //number3 有时候会返回{4, 5}或者{5, 4}
+	assert.Subset(t, []int{4, 5}, number3)
 
 }
 

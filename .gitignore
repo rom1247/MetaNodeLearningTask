@@ -107,3 +107,8 @@ Thumbs.db
 /docker-data/
 /docker-volume/
 /docker-compose.override.yml
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.ipr
