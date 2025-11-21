@@ -60,6 +60,46 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/v1/pub/login": {
+            "post": {
+                "description": "登录",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "登录"
+                ],
+                "summary": "登录",
+                "parameters": [
+                    {
+                        "description": "登录信息",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "登录成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.LoginResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "密码错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -82,6 +122,21 @@ const docTemplate = `{
                 }
             }
         },
+        "request.LoginRequest": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
         "response.ErrorResponse": {
             "type": "object",
             "properties": {
@@ -94,6 +149,27 @@ const docTemplate = `{
                 },
                 "message": {
                     "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.LoginResponse": {
+            "type": "object",
+            "properties": {
+                "expire": {
+                    "description": "Token 过期时间 单位秒",
+                    "type": "integer"
+                },
+                "token": {
+                    "description": "Token",
+                    "type": "string"
+                },
+                "userId": {
+                    "description": "用户ID",
+                    "type": "integer"
+                },
+                "username": {
+                    "description": "用户名",
                     "type": "string"
                 }
             }

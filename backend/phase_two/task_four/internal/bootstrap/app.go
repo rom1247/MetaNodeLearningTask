@@ -12,17 +12,22 @@ import (
 )
 
 type App struct {
-	db         *gorm.DB
-	engine     *gin.Engine
-	postRoutes *routes.PostRoutes
-	userRoutes *routes.UserRoutes
+	db          *gorm.DB
+	engine      *gin.Engine
+	postRoutes  *routes.PostRoutes
+	userRoutes  *routes.UserRoutes
+	loginRoutes *routes.LoginRoutes
 }
 
-func NewApp(db *gorm.DB, postRoutes *routes.PostRoutes, userRoutes *routes.UserRoutes) *App {
+func NewApp(db *gorm.DB,
+	postRoutes *routes.PostRoutes,
+	userRoutes *routes.UserRoutes,
+	loginRoutes *routes.LoginRoutes) *App {
 	r := gin.Default()
 
 	postRoutes.Register(r)
 	userRoutes.Register(r)
+	loginRoutes.Register(r)
 	//rootPath := "./backend/phase_two/task_four"
 	//r.GET("/docs/swagger.json", func(c *gin.Context) {
 	//	c.File(rootPath + "/docs/swagger.json")
@@ -37,12 +42,12 @@ func NewApp(db *gorm.DB, postRoutes *routes.PostRoutes, userRoutes *routes.UserR
 	//	c.Redirect(http.StatusFound, "/static/swagger/index.html")
 	//})
 
-	return &App{db: db, engine: r, postRoutes: postRoutes, userRoutes: userRoutes}
+	return &App{db: db, engine: r, postRoutes: postRoutes, userRoutes: userRoutes, loginRoutes: loginRoutes}
 }
 
 func (a *App) Run() {
 	//http://localhost:8080/swagger/index.html
 	a.engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	MigrateTables(a.db, configs.LoadConfig())
+	MigrateTables(a.db, configs.NewConfig())
 	a.engine.Run(":8080")
 }

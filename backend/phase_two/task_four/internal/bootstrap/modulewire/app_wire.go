@@ -9,4 +9,5 @@ import (
 var AppServiceSet = wire.NewSet(
 	app.NewPostAppService,
 	app.NewUserAppService,
+	app.NewLoginAppService,
 )

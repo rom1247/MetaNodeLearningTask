@@ -9,4 +9,5 @@ import (
 var RoutesSet = wire.NewSet(
 	routes.NewPostRoutes,
 	routes.NewUserRoutes,
+	routes.NewLoginRoutes,
 )
