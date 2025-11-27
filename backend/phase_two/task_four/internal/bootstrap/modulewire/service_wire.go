@@ -9,4 +9,5 @@ import (
 var ServiceSet = wire.NewSet(
 	service.NewPostService,
 	service.NewUserService,
+	service.NewCommentService,
 )
