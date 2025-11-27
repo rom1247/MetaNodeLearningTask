@@ -17,9 +17,10 @@ func NewUserRoutes(controller *controller.UserController) *UserRoutes {
 }
 
 func (r *UserRoutes) Register(router *gin.Engine) {
-	group := router.Group("/api/v1/pri")
+	group := router.Group("/api/v1/pub")
 	{
-		group.POST("/users", r.controller.Create)
+		//注册
+		group.POST("/register", r.controller.Create)
 		//group.GET("", r.controller.List)
 		//group.GET("/:id", r.controller.Get)
 		//group.DELETE("/:id", r.controller.Delete)

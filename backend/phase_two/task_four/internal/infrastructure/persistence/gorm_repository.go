@@ -23,8 +23,8 @@ func (r *Repository[T]) FindByID(id uint) (*T, error) {
 	return &entity, nil
 }
 
-func (r *Repository[T]) FindAll() ([]T, error) {
-	var list []T
+func (r *Repository[T]) FindAll() ([]*T, error) {
+	var list []*T
 	if err := r.db.Find(&list).Error; err != nil {
 		return nil, err
 	}

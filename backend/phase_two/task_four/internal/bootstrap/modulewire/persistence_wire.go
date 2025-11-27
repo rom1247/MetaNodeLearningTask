@@ -9,4 +9,5 @@ import (
 var PersistenceSet = wire.NewSet(
 	persistence.NewGormPostRepository,
 	persistence.NewGormUserRepository,
+	persistence.NewGormCommentRepository,
 )

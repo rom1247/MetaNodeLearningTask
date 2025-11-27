@@ -10,4 +10,5 @@ var ControllerSet = wire.NewSet(
 	controller.NewPostController,
 	controller.NewUserController,
 	controller.NewLoginController,
+	controller.NewCommentController,
 )

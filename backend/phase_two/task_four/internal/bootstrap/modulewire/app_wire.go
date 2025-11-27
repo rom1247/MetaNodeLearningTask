@@ -10,4 +10,5 @@ var AppServiceSet = wire.NewSet(
 	app.NewPostAppService,
 	app.NewUserAppService,
 	app.NewLoginAppService,
+	app.NewCommentAppService,
 )

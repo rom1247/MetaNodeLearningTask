@@ -27,7 +27,7 @@ func NewUserController(userAppService *app.UserAppService) *UserController {
 // @Success 204 {string} string "创建成功"
 // @Failure 400 {object} response.ErrorResponse "请求参数错误"
 // @Failure 500 {object} response.ErrorResponse "系统异常"
-// @Router /api/v1/pri/users [post]
+// @Router /api/v1/pub/register [post]
 func (c *UserController) Create(ctx *gin.Context) {
 	var req request.CreateUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {

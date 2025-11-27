@@ -17,6 +17,6 @@ type CurdRepository[T any] interface {
 	Delete(entity *T) error
 	DeleteById(id uint) error
 	FindByID(id uint) (*T, error)
-	FindAll() ([]T, error)
+	FindAll() ([]*T, error)
 	Transaction(fn func(repo CurdRepository[T]) error) error
 }

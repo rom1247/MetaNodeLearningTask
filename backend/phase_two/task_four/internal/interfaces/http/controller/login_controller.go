@@ -2,9 +2,11 @@ package controller
 
 import (
 	"backend/backend/phase_two/task_four/internal/app"
+	"backend/backend/phase_two/task_four/internal/infrastructure/cache"
 	"backend/backend/phase_two/task_four/internal/interfaces/http/controller/request"
 	"backend/backend/phase_two/task_four/internal/interfaces/http/controller/response"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -46,4 +48,14 @@ func (c *LoginController) Login(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(http.StatusOK, res)
+}
+
+func (c *LoginController) Logout(ctx *gin.Context) {
+	auth := ctx.GetHeader("Authorization")
+
+	token := strings.TrimPrefix(auth, "Bearer ")
+
+	cache.DeleteToken(token)
+
+	ctx.JSON(http.StatusOK, gin.H{"message": "登出成功"})
 }

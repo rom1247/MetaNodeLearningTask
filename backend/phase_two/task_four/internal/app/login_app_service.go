@@ -3,6 +3,7 @@ package app
 import (
 	"backend/backend/phase_two/task_four/configs"
 	"backend/backend/phase_two/task_four/internal/domain/service"
+	"backend/backend/phase_two/task_four/internal/infrastructure/cache"
 	"backend/backend/phase_two/task_four/internal/interfaces/http/controller/request"
 	"backend/backend/phase_two/task_four/internal/interfaces/http/controller/response"
 	"backend/backend/phase_two/task_four/pkg/util"
@@ -35,6 +36,8 @@ func (s *LoginAppService) Login(req request.LoginRequest) (*response.LoginRespon
 	if err != nil {
 		return nil, errors.New("密码错误")
 	}
+
+	cache.StoreToken(token, user.ID)
 
 	return &response.LoginResponse{
 		UserID:   user.ID,

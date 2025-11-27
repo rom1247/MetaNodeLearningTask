@@ -3,7 +3,10 @@ package bootstrap
 import (
 	"backend/backend/phase_two/task_four/configs"
 	_ "backend/backend/phase_two/task_four/docs" // swag init 生成的 docs 包
+	"backend/backend/phase_two/task_four/internal/infrastructure/cache"
+	"backend/backend/phase_two/task_four/internal/infrastructure/middleware"
 	"backend/backend/phase_two/task_four/internal/interfaces/http/routes"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -28,19 +31,6 @@ func NewApp(db *gorm.DB,
 	postRoutes.Register(r)
 	userRoutes.Register(r)
 	loginRoutes.Register(r)
-	//rootPath := "./backend/phase_two/task_four"
-	//r.GET("/docs/swagger.json", func(c *gin.Context) {
-	//	c.File(rootPath + "/docs/swagger.json")
-	//})
-	// 注册整个 static 目录为静态资源
-	//wd, _ := os.Getwd()
-	//staticPath := filepath.Join(wd, "backend", "phase_two", "task_four", "static") //绝对路径
-	//staticPath := rootPath + "/static" // 你想测试的相对路径
-	//r.Static("/static", staticPath)    // 相对 main.go 路径
-	//
-	//r.GET("/docs", func(c *gin.Context) {
-	//	c.Redirect(http.StatusFound, "/static/swagger/index.html")
-	//})
 
 	return &App{db: db, engine: r, postRoutes: postRoutes, userRoutes: userRoutes, loginRoutes: loginRoutes}
 }
@@ -49,5 +39,8 @@ func (a *App) Run() {
 	//http://localhost:8080/swagger/index.html
 	a.engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	MigrateTables(a.db, configs.NewConfig())
+
+	cache.InitTokenCache(2*time.Hour, 10000)
+	a.engine.Use(middleware.GlobalException(true))
 	a.engine.Run(":8080")
 }
