@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ~0.8;
 
-import "backend/phase_three/task2/IERC20.sol";
-
 contract ERC20 {
     uint private constant TOTAL_SUPPLY = 1000;
 
