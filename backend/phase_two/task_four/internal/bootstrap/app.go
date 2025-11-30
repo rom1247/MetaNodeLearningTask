@@ -15,24 +15,27 @@ import (
 )
 
 type App struct {
-	db          *gorm.DB
-	engine      *gin.Engine
-	postRoutes  *routes.PostRoutes
-	userRoutes  *routes.UserRoutes
-	loginRoutes *routes.LoginRoutes
+	db            *gorm.DB
+	engine        *gin.Engine
+	postRoutes    *routes.PostRoutes
+	userRoutes    *routes.UserRoutes
+	loginRoutes   *routes.LoginRoutes
+	commentRoutes *routes.CommentRoutes
 }
 
 func NewApp(db *gorm.DB,
 	postRoutes *routes.PostRoutes,
 	userRoutes *routes.UserRoutes,
-	loginRoutes *routes.LoginRoutes) *App {
+	loginRoutes *routes.LoginRoutes,
+	commentRoutes *routes.CommentRoutes) *App {
 	r := gin.Default()
 
 	postRoutes.Register(r)
 	userRoutes.Register(r)
 	loginRoutes.Register(r)
 
-	return &App{db: db, engine: r, postRoutes: postRoutes, userRoutes: userRoutes, loginRoutes: loginRoutes}
+	return &App{db: db, engine: r, postRoutes: postRoutes, userRoutes: userRoutes, loginRoutes: loginRoutes,
+		commentRoutes: commentRoutes}
 }
 
 func (a *App) Run() {

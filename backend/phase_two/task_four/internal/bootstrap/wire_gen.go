@@ -38,6 +38,11 @@ func InitializeApp() (*App, error) {
 	loginAppService := app.NewLoginAppService(userService)
 	loginController := controller.NewLoginController(loginAppService)
 	loginRoutes := routes.NewLoginRoutes(loginController)
-	bootstrapApp := NewApp(db, postRoutes, userRoutes, loginRoutes)
+	commentRepository := persistence.NewGormCommentRepository(db)
+	commentService := service.NewCommentService(commentRepository)
+	commentAppService := app.NewCommentAppService(commentService)
+	commentController := controller.NewCommentController(commentAppService)
+	commentRoutes := routes.NewCommentRoutes(commentController)
+	bootstrapApp := NewApp(db, postRoutes, userRoutes, loginRoutes, commentRoutes)
 	return bootstrapApp, nil
 }
